@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "933536460606",
+    "project_id": "dreamproperty-5822e",
+    "storage_bucket": "dreamproperty-5822e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933536460606:android:3557f10a25dd2daeef066f",
+        "android_client_info": {
+          "package_name": "com.example.dreamproperty"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "933536460606-eiqqtnjs830uuhmsbmqsqe80mmh72lc4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDi5WwqcpcznWgmAUroeEEiheV_oyfuaR0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "933536460606-eiqqtnjs830uuhmsbmqsqe80mmh72lc4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
