@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".addProperty.AddPropertiesNext">
+    <RelativeLayout
+        android:id="@+id/selecthomeproperty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+        <TextView
+            android:id="@+id/moredetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="More details to get relevant
+                buyers"
+            android:textSize="25dp"
+            android:textColor="@color/black" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@id/selecthomeproperty"
+        android:id="@+id/unitdetailsrelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/browser_actions_bg_grey">
+            <TextView
+                android:id="@+id/unitdetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:text="  Unit Details" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@id/unitdetailsrelative"
+        android:id="@+id/bedroomdetailsrelative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/bedroomsdetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:text="  Bedroom" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <HorizontalScrollView
+        android:layout_below="@id/bedroomdetailsrelative"
+        android:id="@+id/bedroomhoriscrollview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btn1BHK"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="1 BHK" />
+            <Button
+                android:id="@+id/btn2BHK"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="2 BHK" />
+            <Button
+                android:id="@+id/btn3BHK"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="3 BHK" />
+            <Button
+                android:id="@+id/btn4BHK"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="4 BHK" />
+            <Button
+                android:id="@+id/btn5BHK"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="5 BHK+" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <RelativeLayout
+        android:layout_below="@id/bedroomhoriscrollview"
+        android:id="@+id/bathroomdetailsrelative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/bathroomdetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:text="  Bathroom" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <HorizontalScrollView
+        android:layout_below="@id/bathroomdetailsrelative"
+        android:id="@+id/bathroomhoriscrollview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btn0bathroom"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="0" />
+            <Button
+                android:id="@+id/btn1bathroom"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="1" />
+            <Button
+                android:id="@+id/btn2bathroom"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="2" />
+            <Button
+                android:id="@+id/btn3bathroom"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="3" />
+            <Button
+                android:id="@+id/btn4bathroom"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="4" />
+            <Button
+                android:id="@+id/btn5bathroom"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="5+" />
+        </LinearLayout>
+    </HorizontalScrollView>
+    <RelativeLayout
+        android:layout_below="@id/bathroomhoriscrollview"
+        android:id="@+id/areadetailsrelative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/browser_actions_bg_grey">
+            <TextView
+                android:id="@+id/areadetailstv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:text="  Property Area" />
+        </LinearLayout>
+    </RelativeLayout>
+        <LinearLayout
+            android:layout_below="@+id/areadetailsrelative"
+            android:id="@+id/areadetailsll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="20dp"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/areadetailsed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:text="  Area       " />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Sqft"
+                android:layout_gravity="left|center"/>
+        </LinearLayout>
+
+    <RelativeLayout
+        android:layout_below="@+id/areadetailsll"
+        android:id="@+id/nextRelative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true">
+        <ImageView
+            android:id="@+id/lastpagebtn"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/cerclebackgroundpurple"
+            android:src="@drawable/ic_baseline_navigate_next_24"
+            android:padding="10dp"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>
