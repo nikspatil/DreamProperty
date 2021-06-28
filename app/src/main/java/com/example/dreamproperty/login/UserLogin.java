@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -15,8 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dreamproperty.Dashboard;
 import com.example.dreamproperty.R;
-import com.example.dreamproperty.UserDashboard;
+import com.example.dreamproperty.addProperty.AddProperties;
 import com.example.dreamproperty.registerNewUser.registerNewUser;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -30,8 +30,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-
-import static android.content.ContentValues.TAG;
 
 public class UserLogin extends AppCompatActivity {
     private static final int RC_SIGN_IN = 101 ;
@@ -141,7 +139,7 @@ public class UserLogin extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser user) {
-        Intent i = new Intent(UserLogin.this, UserDashboard.class);
+        Intent i = new Intent(UserLogin.this, AddProperties.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
     }
@@ -180,7 +178,7 @@ public class UserLogin extends AppCompatActivity {
     }
 
     private void sendUsertoDashboardActivity() {
-        Intent i = new Intent(UserLogin.this, UserDashboard.class);
+        Intent i = new Intent(UserLogin.this, AddProperties.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
     }
