@@ -79,8 +79,42 @@
                 android:text=" INR RS."
                 android:layout_gravity="left|center"/>
         </LinearLayout>
+
         <LinearLayout
+            android:id="@+id/ownermobilenumberll"
             android:layout_below="@+id/pricedetailsll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/browser_actions_bg_grey">
+            <TextView
+                android:id="@+id/owenermobilenumbered"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:text="  Mobile Number" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_below="@+id/ownermobilenumberll"
+            android:id="@+id/ownermobilenumberedll2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="20dp"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/ownermobilenumberedtv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:text="9999999999"
+                android:inputType="number"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@+id/ownermobilenumberedll2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"

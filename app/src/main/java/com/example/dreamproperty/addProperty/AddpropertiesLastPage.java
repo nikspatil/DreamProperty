@@ -13,10 +13,12 @@ import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.dreamproperty.R;
+import com.example.dreamproperty.buyProperty.BuyProperty;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -53,8 +55,13 @@ public class AddpropertiesLastPage extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser mUser;
     FirebaseFirestore mstore;
+    EditText expectedprice, ownermobinum;
     String userId;
     String getPropertytype, getpropertysubtype, getpropertylocation;
+    String getbedroomtype;
+    String getbathrromtype;
+    String gethousepropertyarea, getpropertyexpectedprice, getownermobinumber;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,12 +70,18 @@ public class AddpropertiesLastPage extends AppCompatActivity {
         getPropertytype = intent.getStringExtra("Property Type");
         getpropertysubtype = intent.getStringExtra("Property Subtype");
         getpropertylocation = intent.getStringExtra("Property Location");
+        getbedroomtype = intent.getStringExtra("House Property Bedrooms");
+        getbathrromtype = intent.getStringExtra("House Property Bathrooms");
+        gethousepropertyarea = intent.getStringExtra("House Property Area");
         System.out.println(getPropertytype);
         System.out.println(getpropertysubtype);
         System.out.println(getpropertylocation);
 
         propertyuploadphoto = findViewById(R.id.uploadpropertyphotobtn);
         displayselectedphotoRV = findViewById(R.id.uploadphotorv);
+        expectedprice = (EditText)findViewById(R.id.pricedetailsed);
+        ownermobinum = (EditText)findViewById(R.id.ownermobilenumberedtv);
+
         finishpropertybtn = findViewById(R.id.finishbtn);
         fileNameList = new ArrayList<>();
         fileDoneList = new ArrayList<>();
@@ -100,6 +113,8 @@ public class AddpropertiesLastPage extends AppCompatActivity {
         finishpropertybtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getpropertyexpectedprice = expectedprice.getText().toString();
+                getownermobinumber = ownermobinum.getText().toString();
                 addpropertuinfo(view);
                 //startActivityForResult(Intent.createChooser(i, "Select House Photos"), RESULT_LOAD_IMAGE);
             }
@@ -155,14 +170,30 @@ public class AddpropertiesLastPage extends AppCompatActivity {
         progressDialog.setMessage("Saving uploaded images...");
         Map<String, Object> dataMap = new HashMap<>();
         //Below line of code will put your images list as an array in firestore
-        dataMap.put("propertyType",getPropertytype);
-        dataMap.put("propertySubType", getpropertysubtype);
-        dataMap.put("propertyLocation", getpropertylocation);
-        dataMap.put("images", savedImagesUri);
+        if(getPropertytype.equals("Home")) {
+            dataMap.put("propertyType", getPropertytype);
+            dataMap.put("propertySubType", getpropertysubtype);
+            dataMap.put("propertyLocation", getpropertylocation);
+            dataMap.put("housepropertybedrooms", getbedroomtype);
+            dataMap.put("housepropertybathrooms", getbathrromtype);
+            dataMap.put("propertyexpectedprice", getpropertyexpectedprice);
+            dataMap.put("propertyarea", gethousepropertyarea);
+            dataMap.put("ownermobilnumer", getownermobinumber);
+            dataMap.put("images", savedImagesUri);
+        }else if(getPropertytype.equals("Office")){
+            dataMap.put("propertyType", getPropertytype);
+            dataMap.put("propertySubType", getpropertysubtype);
+            dataMap.put("propertyLocation", getpropertylocation);
+            dataMap.put("propertyexpectedprice", getpropertyexpectedprice);
+            dataMap.put("ownermobilnumer", getownermobinumber);
+            dataMap.put("images", savedImagesUri);
+        }
         reference.add(dataMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 progressDialog.dismiss();
+                Toast.makeText(AddpropertiesLastPage.this, "Your property added successfully!!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(AddpropertiesLastPage.this , BuyProperty.class));
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

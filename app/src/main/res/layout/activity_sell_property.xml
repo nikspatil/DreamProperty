@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".sellProperty.SellProperty">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,7 +40,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:foreground="?android:attr/selectableItemBackground"
                 android:clickable="true"
-                android:id="@+id/housepropertyid"
+                android:id="@+id/housepropertysellid"
                 android:layout_width="160dp"
                 android:layout_height="190dp"
                 android:layout_margin="10dp"
@@ -72,7 +73,7 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/officepropertyId"
+                android:id="@+id/officepropertysellId"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:layout_width="160dp"
@@ -115,7 +116,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/plotpropertyId"
+                android:id="@+id/plotpropertysellId"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:layout_width="160dp"
@@ -151,7 +152,7 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/farmpropertyId"
+                android:id="@+id/farmpropertysellId"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:layout_width="160dp"
@@ -167,13 +168,11 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="vertical">
-
                     <ImageView
                         android:layout_width="90dp"
                         android:layout_height="90dp"
                         android:src="@drawable/ic_baseline_grass_24"
                         android:padding="10dp"/>
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -191,107 +190,5 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
-            <FrameLayout
-                android:id="@+id/addpropertyframelayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </FrameLayout>
-
-        <RelativeLayout
-            android:id="@+id/selecthomeproperty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="20dp">
-            <TextView
-                android:id="@+id/propertysubtype"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="What type of property is it?"
-                android:textSize="25dp"
-                android:textColor="@color/black" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_below="@id/selecthomeproperty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:orientation="horizontal">
-                <Button
-                    android:id="@+id/typeresidential"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Residential"
-                    tools:ignore="NotSibling" />
-
-                <Button
-                    android:id="@+id/typecommerical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="Commercial" />
-            </LinearLayout>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/searchhomeproperty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-            <TextView
-                android:id="@+id/propertylocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Where the property is it?"
-                android:textSize="25dp"
-                android:textColor="@color/black" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_below="@id/searchhomeproperty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <androidx.cardview.widget.CardView
-                android:id="@+id/searchlocation_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardElevation="5dp"
-                app:cardCornerRadius="20dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="true">
-                <EditText
-                    android:id="@+id/edtvsearchpropertylocation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/travel_que"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    android:drawableLeft="@drawable/ic_baseline_add_location_alt_24"
-                    android:hint="   Add property location"
-                    android:padding="10dp"
-                    android:textSize="20sp"/>
-            </androidx.cardview.widget.CardView>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/nextRelative"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-            <ImageView
-                android:id="@+id/nextpagebtn"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:background="@drawable/cerclebackgroundpurple"
-                android:src="@drawable/ic_baseline_navigate_next_24"
-                android:padding="10dp"/>
-        </RelativeLayout>
-        </LinearLayout>
-
-</ScrollView>
+    </LinearLayout>
+</LinearLayout>

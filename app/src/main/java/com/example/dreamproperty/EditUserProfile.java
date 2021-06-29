@@ -20,6 +20,7 @@ import com.example.dreamproperty.registerNewUser.registerNewUser;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -42,6 +43,7 @@ public class EditUserProfile extends AppCompatActivity {
     FirebaseUser mUser;
     FirebaseFirestore mstore;
     StorageReference storageReference;
+    CollectionReference reference;
     public static final int READ_EXTERNAL_STORAGE = 0;
     private static final int GALLERY_INTENT = 2;
     String userId;
@@ -111,6 +113,7 @@ public class EditUserProfile extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         DocumentReference docref = mstore.collection("users").document(mUser.getUid());
+                        //reference = mstore.collection("usersProperty");
                         Map<String, Object> user = new HashMap<>();
                         user.put("fullName", editFullName.getText().toString() );
                         user.put("email", email);

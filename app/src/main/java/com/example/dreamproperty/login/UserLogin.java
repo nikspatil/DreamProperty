@@ -17,6 +17,11 @@ import android.widget.Toast;
 import com.example.dreamproperty.Dashboard;
 import com.example.dreamproperty.R;
 import com.example.dreamproperty.addProperty.AddProperties;
+import com.example.dreamproperty.addProperty.AddPropertiesNext;
+import com.example.dreamproperty.addProperty.AddpropertiesLastPage;
+import com.example.dreamproperty.buyProperty.BuyProperty;
+import com.example.dreamproperty.buyProperty.Buyproperties;
+import com.example.dreamproperty.buyProperty.SimplelearnFirestore;
 import com.example.dreamproperty.registerNewUser.registerNewUser;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -139,7 +144,7 @@ public class UserLogin extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser user) {
-        Intent i = new Intent(UserLogin.this, AddProperties.class);
+        Intent i = new Intent(UserLogin.this, Dashboard.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
     }
@@ -178,7 +183,7 @@ public class UserLogin extends AppCompatActivity {
     }
 
     private void sendUsertoDashboardActivity() {
-        Intent i = new Intent(UserLogin.this, AddProperties.class);
+        Intent i = new Intent(UserLogin.this, Dashboard.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
     }
