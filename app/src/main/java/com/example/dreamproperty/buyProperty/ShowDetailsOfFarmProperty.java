@@ -6,69 +6,45 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.dreamproperty.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.smarteist.autoimageslider.SliderView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowDetailsOfHouseproperty extends AppCompatActivity {
+public class ShowDetailsOfFarmProperty extends AppCompatActivity {
 
     List<String> images;
-    TextView proptylocation, propertyprice, NoOfBeds, noOfBaths, propertyarea;
+    TextView proptylocation, propertyprice, propertyarea;
     SliderView propertyimgslider;
+    ImageButton callowner;
     String getPropertytype, getpropertysubtype, getpropertylocation;
-    String getbedroomtype;
-    String getbathrromtype;
-    String gethousepropertyarea, getpropertyexpectedprice, getownermobinumber;
-
-    FirebaseAuth mAuth;
-    FirebaseUser mUser;
-    FirebaseFirestore mstore;
-    ImageView calltoOwner;
+    String getfarmpropertyarea, getpropertyexpectedprice, getownermobinumber;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_details_ofproperty);
+        setContentView(R.layout.activity_show_details_of_farm_property);
+
         propertyimgslider = findViewById(R.id.property_image_slider);
         proptylocation = (TextView)findViewById(R.id.proplocationtv);
         propertyprice = (TextView)findViewById(R.id.proppricetv);
-        NoOfBeds = (TextView)findViewById(R.id.NoofBeds);
-        noOfBaths = (TextView)findViewById(R.id.NoofBathrooms);
-        propertyarea = (TextView)findViewById(R.id.houseproparea);
-        calltoOwner = findViewById(R.id.callowner);
+        propertyarea = (TextView)findViewById(R.id.farmproparea);
+        callowner = findViewById(R.id.callofficeowner);
 
         ArrayList<String> propetyImageList = (ArrayList<String>) getIntent().getSerializableExtra("PropertyImages");
         Intent intent = getIntent();
-//        getPropertytype = intent.getStringExtra("Property Type");
-//        getpropertysubtype = intent.getStringExtra("Property Subtype");
         getpropertylocation = intent.getStringExtra("Property Location");
-        getbedroomtype = intent.getStringExtra("House Property Bedrooms");
-        getbathrromtype = intent.getStringExtra("House Property Bathrooms");
-        getpropertyexpectedprice = intent.getStringExtra("House Property Price");
-        gethousepropertyarea = intent.getStringExtra("House Property Area");
+        getpropertyexpectedprice = intent.getStringExtra("Farm Property Price");
+        getfarmpropertyarea = intent.getStringExtra("Farm Property Area");
         getownermobinumber = intent.getStringExtra("ownermobilnumer");
         getpropertyexpectedprice += " Price (INR)";
-        getbathrromtype += " Baths";
-        gethousepropertyarea +="sqft";
-        System.out.println("Property Details:");
-        System.out.println(getbedroomtype);
-        System.out.println(getbathrromtype);
-        System.out.println(getpropertylocation);
+        getfarmpropertyarea += "  Sqft (Area)";
         proptylocation.setText(getpropertylocation);
         propertyprice.setText(getpropertyexpectedprice);
-        NoOfBeds.setText(getbedroomtype);
-        noOfBaths.setText(getbathrromtype);
-        propertyarea.setText(gethousepropertyarea);
+        propertyarea.setText(getfarmpropertyarea);
         images = new ArrayList<>();
         for (int i = 0; i < propetyImageList.size(); i++) {
             System.out.println(propetyImageList.get(i));
@@ -78,7 +54,7 @@ public class ShowDetailsOfHouseproperty extends AppCompatActivity {
         propertyimgslider.setSliderAdapter(propertyDetailsAdapter);
 
 
-        calltoOwner.setOnClickListener(new View.OnClickListener() {
+        callowner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Intent.ACTION_DIAL);
@@ -87,6 +63,5 @@ public class ShowDetailsOfHouseproperty extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
     }
 }

@@ -130,7 +130,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:drawableLeft="@drawable/ic_baseline_grass_24"
-                android:text=" Office"
+                android:text=" Farm"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
         </androidx.cardview.widget.CardView>

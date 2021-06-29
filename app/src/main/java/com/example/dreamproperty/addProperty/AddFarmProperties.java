@@ -21,7 +21,7 @@ import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import java.util.Arrays;
 import java.util.List;
 
-public class AddofficeProperties extends AppCompatActivity {
+public class AddFarmProperties extends AppCompatActivity {
 
     TextView choosetype, choosepropertysubtype, whereisproperty;
     EditText searchpropertyloc;
@@ -37,7 +37,6 @@ public class AddofficeProperties extends AppCompatActivity {
         setContentView(R.layout.activity_add_properties);
 
         Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
-
         homeId =(CardView)findViewById(R.id.housepropertyid);
         plotId =(CardView)findViewById(R.id.plotpropertyId);
         officeId =(CardView)findViewById(R.id.officepropertyId);
@@ -60,14 +59,14 @@ public class AddofficeProperties extends AppCompatActivity {
         searchlocationcardId = findViewById(R.id.searchlocation_card);
         searchlocationcardId.setVisibility(View.INVISIBLE);
 
-        officeId.setOnClickListener(new View.OnClickListener() {
+        farmId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                propertyType = "Office";
+                propertyType = "Farm";
                 homeId.setVisibility(View.GONE);
                 plotId.setVisibility(View.GONE);
-                officeId.setVisibility(View.VISIBLE);
-                farmId.setVisibility(View.GONE);
+                officeId.setVisibility(View.GONE);
+                farmId.setVisibility(View.VISIBLE);
                 choosepropertysubtype.setVisibility(View.VISIBLE);
                 residentialsubtype.setVisibility(View.VISIBLE);
                 commercialsubtype.setVisibility(View.VISIBLE);
@@ -76,39 +75,22 @@ public class AddofficeProperties extends AppCompatActivity {
             }
         });
 
-        residentialsubtype.setOnClickListener(new View.OnClickListener() {
+
+        plotId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                propertysubtype = "Residential";
-                commercialsubtype.setVisibility(View.INVISIBLE);
-                callSearchproprtylocation();
+                propertyType = "Plot";
+                homeId.setVisibility(View.GONE);
+                plotId.setVisibility(View.VISIBLE);
+                officeId.setVisibility(View.GONE);
+                farmId.setVisibility(View.GONE);
+                choosepropertysubtype.setVisibility(View.VISIBLE);
+                residentialsubtype.setVisibility(View.VISIBLE);
+                commercialsubtype.setVisibility(View.VISIBLE);
+                choosTypeStr = "Choose Property Again";
+                choosetype.setText(choosTypeStr);
             }
         });
-
-        // get property location
-        searchpropertyloc.setFocusable(false);
-        searchpropertyloc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                List<Place.Field> fields = Arrays.asList(Place.Field.ADDRESS);
-                Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fields).build(
-                        AddofficeProperties.this);
-                startActivityForResult(intent, 100);
-            }
-        });
-
-        nextpropertyPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String getSearchedLocation = searchpropertyloc.getText().toString().trim();
-                Intent intent = new Intent(getApplicationContext(), AddpropertiesLastPage.class);
-                intent.putExtra("Property Type",propertyType);
-                intent.putExtra("Property Subtype", propertysubtype);
-                intent.putExtra("Property Location", getSearchedLocation);
-                startActivity(intent);
-            }
-        });
-
         choosetype.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,6 +108,38 @@ public class AddofficeProperties extends AppCompatActivity {
                 }
             }
         });
+        residentialsubtype.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                propertysubtype = "Residential";
+                commercialsubtype.setVisibility(View.INVISIBLE);
+                callSearchproprtylocation();
+            }
+        });
+
+        // get property location
+        searchpropertyloc.setFocusable(false);
+        searchpropertyloc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                List<Place.Field> fields = Arrays.asList(Place.Field.ADDRESS);
+                Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fields).build(
+                        AddFarmProperties.this);
+                startActivityForResult(intent, 100);
+            }
+        });
+
+        nextpropertyPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String getSearchedLocation = searchpropertyloc.getText().toString().trim();
+                Intent intent = new Intent(getApplicationContext(), AddFarmPropertiesLastPage.class);
+                intent.putExtra("Property Type",propertyType);
+                intent.putExtra("Property Subtype", propertysubtype);
+                intent.putExtra("Property Location", getSearchedLocation);
+                startActivity(intent);
+            }
+        });
     }
 
     private void callSearchproprtylocation() {
@@ -140,6 +154,5 @@ public class AddofficeProperties extends AppCompatActivity {
             Place place = Autocomplete.getPlaceFromIntent(data);
             searchpropertyloc.setText(place.getAddress());
         }
-
     }
 }

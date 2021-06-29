@@ -66,6 +66,7 @@
             android:id="@+id/proppricetv" />
         <ImageButton
             android:layout_marginLeft="80dp"
+            android:id="@+id/callowner"
             android:src="@drawable/ic_baseline_call_24"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

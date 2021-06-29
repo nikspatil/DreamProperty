@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.dreamproperty.R;
+import com.example.dreamproperty.addProperty.AddFarmProperties;
 import com.example.dreamproperty.addProperty.AddProperties;
 import com.example.dreamproperty.addProperty.AddofficeProperties;
 
@@ -38,6 +39,12 @@ public class SellProperty extends AppCompatActivity implements View.OnClickListe
                     break;
                 case R.id.officepropertysellId:
                     startActivity(new Intent(SellProperty.this , AddofficeProperties.class));
+                    break;
+                case R.id.farmpropertysellId:
+                    startActivity(new Intent(SellProperty.this , AddFarmProperties.class));
+                    break;
+                case R.id.plotpropertysellId:
+                    startActivity(new Intent(SellProperty.this , AddFarmProperties.class));
                     break;
             }
     }

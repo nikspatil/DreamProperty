@@ -83,24 +83,35 @@ public class AddPropertiesNext extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.btn2BHK:
                 getbedroomtype = "2BHK";
+                break;
             case R.id.btn3BHK:
                 getbedroomtype = "3BHK";
+                break;
             case R.id.btn4BHK:
                 getbedroomtype = "4BHK";
+                break;
             case R.id.btn5BHK:
                 getbedroomtype = "5BHK";
+                break;
             case R.id.btn0bathroom:
                 getbathrromtype = "0";
+                break;
             case R.id.btn1bathroom:
                 getbathrromtype = "1";
+                break;
             case R.id.btn2bathroom:
                 getbathrromtype = "2";
+                break;
             case R.id.btn3bathroom:
                 getbathrromtype = "3";
+                break;
             case R.id.btn4bathroom:
                 getbathrromtype = "4";
+                break;
             case R.id.btn5bathroom:
                 getbathrromtype = "5";
+                break;
+
 
         }
     }

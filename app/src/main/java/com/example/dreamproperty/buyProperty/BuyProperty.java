@@ -58,8 +58,8 @@ public class BuyProperty extends FragmentActivity implements OnMapReadyCallback,
         getPropertylocationInput = (TextView) findViewById(R.id.searchpropcitytv);
 
         homeId =(CardView)findViewById(R.id.homepropcard);
-        plotId =(CardView)findViewById(R.id.officepropcard);
-        officeId =(CardView)findViewById(R.id.plotpropertycard);
+        plotId =(CardView)findViewById(R.id.plotpropertycard);
+        officeId =(CardView)findViewById(R.id.officepropcard);
         farmId =(CardView)findViewById(R.id.farmpropcard);
 
         homeId.setOnClickListener(this);
@@ -159,6 +159,20 @@ public class BuyProperty extends FragmentActivity implements OnMapReadyCallback,
                 intent1.putExtra("Property Type",propertypecard);
                 startActivity(intent1);
                 break;
+            case R.id.farmpropcard:
+                propertypecard="Farm";
+                Intent intent2 = new Intent(getApplicationContext(), Buyproperties.class);
+                intent2.putExtra("Property Type",propertypecard);
+                startActivity(intent2);
+                break;
+            case R.id.plotpropertycard:
+                propertypecard="Plot";
+                Intent intent3 = new Intent(getApplicationContext(), Buyproperties.class);
+                intent3.putExtra("Property Type",propertypecard);
+                startActivity(intent3);
+                break;
+
+
         }
     }
 }

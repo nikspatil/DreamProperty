@@ -37,8 +37,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AddpropertiesLastPage extends AppCompatActivity {
-
+public class AddFarmPropertiesLastPage extends AppCompatActivity {
     private static final int RESULT_LOAD_IMAGE = 1 ;
     Button propertyuploadphoto;
     RecyclerView displayselectedphotoRV;
@@ -55,34 +54,27 @@ public class AddpropertiesLastPage extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser mUser;
     FirebaseFirestore mstore;
-    EditText expectedprice, ownermobinum;
+    EditText expectedprice, farmarea, ownermobinum;
     String userId;
     String getPropertytype, getpropertysubtype, getpropertylocation;
-    String getbedroomtype;
-    String getbathrromtype;
-    String gethousepropertyarea, getpropertyexpectedprice, getownermobinumber;
-
+    String getpropertyexpectedprice, getownermobinumber, getfarmarea;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_addproperties_last_page);
+        setContentView(R.layout.activity_add_farm_properties);
+
         Intent intent = getIntent();
         getPropertytype = intent.getStringExtra("Property Type");
         getpropertysubtype = intent.getStringExtra("Property Subtype");
         getpropertylocation = intent.getStringExtra("Property Location");
-        getbedroomtype = intent.getStringExtra("House Property Bedrooms");
-        getbathrromtype = intent.getStringExtra("House Property Bathrooms");
-        gethousepropertyarea = intent.getStringExtra("House Property Area");
-        System.out.println(getPropertytype);
-        System.out.println(getpropertysubtype);
-        System.out.println(getpropertylocation);
-        System.out.println(getbathrromtype);
+
         propertyuploadphoto = findViewById(R.id.uploadpropertyphotobtn);
         displayselectedphotoRV = findViewById(R.id.uploadphotorv);
         expectedprice = (EditText)findViewById(R.id.pricedetailsed);
         ownermobinum = (EditText)findViewById(R.id.ownermobilenumberedtv);
-
+        farmarea = (EditText)findViewById(R.id.farmareainputedt);
         finishpropertybtn = findViewById(R.id.finishbtn);
+
         fileNameList = new ArrayList<>();
         fileDoneList = new ArrayList<>();
         AllImageUri = new ArrayList<Uri>();
@@ -116,6 +108,7 @@ public class AddpropertiesLastPage extends AppCompatActivity {
             public void onClick(View view) {
                 getpropertyexpectedprice = expectedprice.getText().toString();
                 getownermobinumber = ownermobinum.getText().toString();
+                getfarmarea = farmarea.getText().toString();
                 addpropertuinfo(view);
                 //startActivityForResult(Intent.createChooser(i, "Select House Photos"), RESULT_LOAD_IMAGE);
             }
@@ -147,7 +140,7 @@ public class AddpropertiesLastPage extends AppCompatActivity {
                                         uploadListAdapter.notifyDataSetChanged();
                                     }else{
                                         mStorage.child("usersProperty/"+mAuth.getCurrentUser().getUid()).child(fileNameList.get(finalI)).delete();
-                                        Toast.makeText(AddpropertiesLastPage.this, "Couldn't save "+fileNameList.get(finalI), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(AddFarmPropertiesLastPage.this, "Couldn't save "+fileNameList.get(finalI), Toast.LENGTH_SHORT).show();
                                     }
                                     if (counter == fileNameList.size()){
                                         saveImageDataToFirestore(progressDialog);
@@ -157,7 +150,7 @@ public class AddpropertiesLastPage extends AppCompatActivity {
                         }else{
                             progressDialog.setMessage("Uploaded "+counter+"/"+fileNameList.size());
                             counter++;
-                            Toast.makeText(AddpropertiesLastPage.this, "Couldn't upload "+fileNameList.get(finalI), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddFarmPropertiesLastPage.this, "Couldn't upload "+fileNameList.get(finalI), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -171,21 +164,20 @@ public class AddpropertiesLastPage extends AppCompatActivity {
         progressDialog.setMessage("Saving uploaded images...");
         Map<String, Object> dataMap = new HashMap<>();
         //Below line of code will put your images list as an array in firestore
-        if(getPropertytype.equals("Home")) {
+        if(getPropertytype.equals("Farm")) {
             dataMap.put("propertyType", getPropertytype);
             dataMap.put("propertySubType", getpropertysubtype);
             dataMap.put("propertyLocation", getpropertylocation);
-            dataMap.put("housepropertybedrooms", getbedroomtype);
-            dataMap.put("housepropertybathrooms", getbathrromtype);
             dataMap.put("propertyexpectedprice", getpropertyexpectedprice);
-            dataMap.put("propertyarea", gethousepropertyarea);
+            dataMap.put("propertyarea",getfarmarea);
             dataMap.put("ownermobilnumer", getownermobinumber);
             dataMap.put("images", savedImagesUri);
-        }else if(getPropertytype.equals("Office")){
+        }else if(getPropertytype.equals("Plot")) {
             dataMap.put("propertyType", getPropertytype);
             dataMap.put("propertySubType", getpropertysubtype);
             dataMap.put("propertyLocation", getpropertylocation);
             dataMap.put("propertyexpectedprice", getpropertyexpectedprice);
+            dataMap.put("propertyarea",getfarmarea);
             dataMap.put("ownermobilnumer", getownermobinumber);
             dataMap.put("images", savedImagesUri);
         }
@@ -193,8 +185,8 @@ public class AddpropertiesLastPage extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 progressDialog.dismiss();
-                Toast.makeText(AddpropertiesLastPage.this, "Your property added successfully!!", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(AddpropertiesLastPage.this , BuyProperty.class);
+                Toast.makeText(AddFarmPropertiesLastPage.this, "Your property added successfully!!", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(AddFarmPropertiesLastPage.this , BuyProperty.class);
 //                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
             }
@@ -209,13 +201,13 @@ public class AddpropertiesLastPage extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK){
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK) {
 
-            if(data.getClipData() != null){
+            if (data.getClipData() != null) {
 
                 int totalItemsSelected = data.getClipData().getItemCount();
 
-                for(int i = 0; i < totalItemsSelected; i++){
+                for (int i = 0; i < totalItemsSelected; i++) {
 
                     fileUri = data.getClipData().getItemAt(i).getUri();
                     AllImageUri.add(fileUri);
@@ -228,14 +220,13 @@ public class AddpropertiesLastPage extends AppCompatActivity {
                     uploadListAdapter.notifyDataSetChanged();
                 }
 
-            } else if (data.getData() != null){
+            } else if (data.getData() != null) {
 
-                Toast.makeText(AddpropertiesLastPage.this, "Selected Single File", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddFarmPropertiesLastPage.this, "Selected Single File", Toast.LENGTH_SHORT).show();
 
             }
 
         }
-
     }
 
     public String getFileName(Uri uri) {

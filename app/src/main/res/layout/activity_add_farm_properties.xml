@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".addProperty.AddpropertiesLastPage">
+    tools:context=".addProperty.AddFarmPropertiesLastPage">
     <RelativeLayout
         android:id="@+id/uploadphotorl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp">
+        >
         <LinearLayout
             android:id="@+id/propertyphotoll"
             android:layout_width="match_parent"
@@ -30,39 +30,38 @@
             android:layout_centerHorizontal="true"
             android:layout_height="wrap_content"
             android:layout_below="@+id/propertyphotoll"
-            android:layout_marginTop="12dp"
             />
-        <RelativeLayout
-            android:layout_below="@+id/uploadpropertyphotobtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
+       <ScrollView
+           android:layout_below="@+id/uploadpropertyphotobtn"
+           android:layout_width="wrap_content"
+           android:layout_centerHorizontal="true"
+           android:layout_height="wrap_content">
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@id/uploadpropertyphotobtn"
             android:id="@+id/uploadphotorv"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-        </RelativeLayout>
+       </ScrollView>
     </RelativeLayout>
-
     <RelativeLayout
-    android:layout_below="@id/uploadphotorl"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="25dp">
-    <LinearLayout
-        android:id="@+id/propepriceotoll"
-        android:layout_width="match_parent"
+        android:layout_below="@id/uploadphotorl"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/browser_actions_bg_grey">
-        <TextView
-            android:id="@+id/propertypricetv"
-            android:layout_width="wrap_content"
+        android:layout_marginTop="10dp">
+        <LinearLayout
+            android:id="@+id/propepriceotoll"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="15dp"
-            android:text="  Expected Price" />
-    </LinearLayout>
+            android:background="@color/browser_actions_bg_grey">
+            <TextView
+                android:id="@+id/propertypricetv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:text="  Expected Price" />
+        </LinearLayout>
         <LinearLayout
             android:layout_below="@+id/areadetailsrelative"
             android:id="@+id/pricedetailsll"
@@ -85,13 +84,48 @@
                 android:text=" INR RS."
                 android:layout_gravity="left|center"/>
         </LinearLayout>
-
         <LinearLayout
-            android:id="@+id/ownermobilenumberll"
             android:layout_below="@+id/pricedetailsll"
+            android:id="@+id/farmareall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:background="@color/browser_actions_bg_grey"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/farmareatv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:text="  Farm Area" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_below="@+id/farmareall"
+            android:id="@+id/farmareainputll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/farmareainputedt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:text=" Area"
+                android:inputType="number"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Sqft"
+                android:layout_gravity="left|center"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ownermobilenumberll"
+            android:layout_below="@+id/farmareainputll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:background="@color/browser_actions_bg_grey">
             <TextView
                 android:id="@+id/owenermobilenumbered"
@@ -106,7 +140,7 @@
             android:id="@+id/ownermobilenumberedll2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:paddingLeft="20dp"
             android:orientation="horizontal">
             <EditText
@@ -115,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textSize="15dp"
-                android:text="9999999999"
+                android:text="@string/fui_invalid_phone_number"
                 android:inputType="number"/>
         </LinearLayout>
 
@@ -125,14 +159,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:layout_centerHorizontal="true">
-        <ImageView
-            android:id="@+id/finishbtn"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:background="@drawable/cerclebackgroundpurple"
-            android:src="@drawable/ic_baseline_checklist_24"
-            android:padding="10dp"
-            />
+            <ImageView
+                android:id="@+id/finishbtn"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/cerclebackgroundpurple"
+                android:src="@drawable/ic_baseline_checklist_24"
+                android:padding="10dp"
+                />
         </LinearLayout>
     </RelativeLayout>
 
