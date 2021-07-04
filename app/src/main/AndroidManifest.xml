@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS"/>
 
     <application
         android:allowBackup="true"
@@ -19,20 +20,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DreamProperty">
-        <activity android:name=".buyProperty.ShowDetailsOfFarmProperty"></activity>
+        <activity android:name=".ViewFavouritesProperties"
+            ></activity>
+        <activity
+            android:name=".buyProperty.ShowDetailsOfFarmProperty"
+            android:label="Details" />
         <activity android:name=".addProperty.AddFarmPropertiesLastPage" />
         <activity android:name=".addProperty.AddFarmProperties" />
-        <activity android:name=".buyProperty.ShowDetailsOfOfficeProperty" />
+        <activity android:name=".buyProperty.ShowDetailsOfOfficeProperty"
+            android:label="Details" />
         <activity android:name=".sellProperty.SellProperty" />
         <activity android:name=".addProperty.AddofficeProperties" />
-        <!--
-             The API key for Google Maps-based APIs is defined as a string resource.
-             (See the file "res/values/google_maps_api.xml").
-             Note that the API key is linked to the encryption key used to sign the APK.
-             You need a different API key for each encryption key, including the release key that is used to
-             sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/.
-        -->
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -40,15 +39,20 @@
         <activity
             android:name=".buyProperty.BuyProperty"
             android:label="@string/title_activity_buy_property" />
-        <activity android:name=".buyProperty.ShowDetailsOfHouseproperty" />
-        <activity android:name=".buyProperty.SimplelearnFirestore" />
+        <activity android:name=".buyProperty.ShowDetailsOfHouseproperty"
+            android:label="Details" />
+        <activity
+            android:name=".buyProperty.SimplelearnFirestore"
+            android:label="My new title" />
         <activity android:name=".buyProperty.Buyproperties" />
         <activity android:name=".addProperty.AddpropertiesLastPage" />
         <activity android:name=".addProperty.AddPropertiesNext" />
         <activity android:name=".addProperty.AddProperties" />
         <activity android:name=".Dashboard" />
         <activity android:name=".EditUserProfile" />
-        <activity android:name=".login.UserLogin" />
+        <activity
+            android:name=".login.UserLogin"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".registerNewUser.registerNewUser" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -57,7 +57,8 @@ public class AddPropertiesNext extends AppCompatActivity implements View.OnClick
         String getPropertytype = intent.getStringExtra("Property Type");
         String getpropertysubtype = intent.getStringExtra("Property Subtype");
         String getpropertylocation = intent.getStringExtra("Property Location");
-
+        String getpropertyLatlong = intent.getStringExtra("Property LatLong");
+        System.out.println("Property latlong" + getpropertyLatlong);
         lastpropertyPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,6 +67,7 @@ public class AddPropertiesNext extends AppCompatActivity implements View.OnClick
                 intent.putExtra("Property Type",getPropertytype);
                 intent.putExtra("Property Subtype", getpropertysubtype);
                 intent.putExtra("Property Location", getpropertylocation);
+                intent.putExtra("Property LatLong", getpropertyLatlong);
                 intent.putExtra("House Property Bedrooms", getbedroomtype);
                 intent.putExtra("House Property Bathrooms", getbathrromtype);
                 intent.putExtra("House Property Area", gethousepropertyarea);
@@ -111,8 +113,6 @@ public class AddPropertiesNext extends AppCompatActivity implements View.OnClick
             case R.id.btn5bathroom:
                 getbathrromtype = "5";
                 break;
-
-
         }
     }
 }

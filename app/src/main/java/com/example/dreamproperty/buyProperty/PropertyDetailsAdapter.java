@@ -18,7 +18,7 @@ import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 public class PropertyDetailsAdapter extends SliderViewAdapter<PropertyDetailsAdapter.PropertyDetailsHolder> {
 
     List<String> imageList;
-    PropertyDetailsAdapter(List<String> list){
+    public PropertyDetailsAdapter(List<String> list){
         this.imageList = list;
     }
 

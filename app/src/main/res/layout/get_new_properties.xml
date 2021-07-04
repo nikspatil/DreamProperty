@@ -46,9 +46,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed"
                 tools:text="Dicoding" />
-
         </LinearLayout>
-
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

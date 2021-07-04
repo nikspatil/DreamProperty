@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.dreamproperty.Dashboard;
 import com.example.dreamproperty.R;
 import com.example.dreamproperty.buyProperty.BuyProperty;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -57,7 +58,7 @@ public class AddpropertiesLastPage extends AppCompatActivity {
     FirebaseFirestore mstore;
     EditText expectedprice, ownermobinum;
     String userId;
-    String getPropertytype, getpropertysubtype, getpropertylocation;
+    String getPropertytype, getpropertysubtype, getpropertylocation, getpropertyLatlong;
     String getbedroomtype;
     String getbathrromtype;
     String gethousepropertyarea, getpropertyexpectedprice, getownermobinumber;
@@ -70,12 +71,14 @@ public class AddpropertiesLastPage extends AppCompatActivity {
         getPropertytype = intent.getStringExtra("Property Type");
         getpropertysubtype = intent.getStringExtra("Property Subtype");
         getpropertylocation = intent.getStringExtra("Property Location");
+        getpropertyLatlong = intent.getStringExtra("Property LatLong");
         getbedroomtype = intent.getStringExtra("House Property Bedrooms");
         getbathrromtype = intent.getStringExtra("House Property Bathrooms");
         gethousepropertyarea = intent.getStringExtra("House Property Area");
         System.out.println(getPropertytype);
         System.out.println(getpropertysubtype);
         System.out.println(getpropertylocation);
+        System.out.println(getpropertyLatlong);
         System.out.println(getbathrromtype);
         propertyuploadphoto = findViewById(R.id.uploadpropertyphotobtn);
         displayselectedphotoRV = findViewById(R.id.uploadphotorv);
@@ -170,11 +173,11 @@ public class AddpropertiesLastPage extends AppCompatActivity {
     private void saveImageDataToFirestore(ProgressDialog progressDialog) {
         progressDialog.setMessage("Saving uploaded images...");
         Map<String, Object> dataMap = new HashMap<>();
-        //Below line of code will put your images list as an array in firestore
         if(getPropertytype.equals("Home")) {
             dataMap.put("propertyType", getPropertytype);
             dataMap.put("propertySubType", getpropertysubtype);
             dataMap.put("propertyLocation", getpropertylocation);
+            dataMap.put("propertyLatLong", getpropertyLatlong);
             dataMap.put("housepropertybedrooms", getbedroomtype);
             dataMap.put("housepropertybathrooms", getbathrromtype);
             dataMap.put("propertyexpectedprice", getpropertyexpectedprice);
@@ -185,6 +188,7 @@ public class AddpropertiesLastPage extends AppCompatActivity {
             dataMap.put("propertyType", getPropertytype);
             dataMap.put("propertySubType", getpropertysubtype);
             dataMap.put("propertyLocation", getpropertylocation);
+            dataMap.put("propertyLatLong", getpropertyLatlong);
             dataMap.put("propertyexpectedprice", getpropertyexpectedprice);
             dataMap.put("ownermobilnumer", getownermobinumber);
             dataMap.put("images", savedImagesUri);
@@ -194,8 +198,7 @@ public class AddpropertiesLastPage extends AppCompatActivity {
             public void onSuccess(DocumentReference documentReference) {
                 progressDialog.dismiss();
                 Toast.makeText(AddpropertiesLastPage.this, "Your property added successfully!!", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(AddpropertiesLastPage.this , BuyProperty.class);
-//                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                Intent i = new Intent(AddpropertiesLastPage.this , Dashboard.class);
                 startActivity(i);
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -222,7 +225,6 @@ public class AddpropertiesLastPage extends AppCompatActivity {
                     System.out.println("Images URI");
                     System.out.println(AllImageUri.get(i));
                     String fileName = getFileName(fileUri);
-
                     fileNameList.add(fileName);
                     fileDoneList.add("uploading");
                     uploadListAdapter.notifyDataSetChanged();

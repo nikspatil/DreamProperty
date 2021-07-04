@@ -16,11 +16,12 @@ public class Note {
     private String housepropertybathrooms;
     private String housepropertybedrooms;
     private String propertyarea;
+    private String propertyLatLong;
     List<String> images;
     public Note() {
         //public no-arg constructor needed
     }
-    public Note(String title, String description, String propertyType, String propertySubType, String propertyLocation, String propertyexpectedprice, String ownermobilnumer, String housepropertybathrooms, String housepropertybedrooms, List<String> images, String propertArea) {
+    public Note(String title, String description, String propertyType, String propertySubType, String propertyLocation, String propertyexpectedprice, String ownermobilnumer, String housepropertybathrooms, String housepropertybedrooms, List<String> images, String propertArea, String propertyLatLong) {
         this.title = title;
         this.description = description;
         this.propertyType = propertyType;
@@ -31,6 +32,7 @@ public class Note {
         this.housepropertybathrooms = housepropertybathrooms;
         this.housepropertybedrooms = housepropertybedrooms;
         this.propertyarea = propertArea;
+        this.propertyLatLong = propertyLatLong;
         this.images = images;
     }
 
@@ -41,10 +43,10 @@ public class Note {
     public void setDocumentId(String documentId) {
         this.documentId = documentId;
     }
-//    public Note(String title, String description) {
-//        this.title = title;
-//        this.description = description;
-//    }
+    public Note(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
     public String getTitle() {
         return title;
     }
@@ -66,6 +68,14 @@ public class Note {
 
     public void setPropertySubType(String propertySubType) {
         this.propertySubType = propertySubType;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<String> getImages() {
@@ -122,5 +132,13 @@ public class Note {
 
     public void setHousepropertybedrooms(String housepropertybedrooms) {
         this.housepropertybedrooms = housepropertybedrooms;
+    }
+
+    public String getPropertyLatLong() {
+        return propertyLatLong;
+    }
+
+    public void setPropertyLatLong(String propertyLatLong) {
+        this.propertyLatLong = propertyLatLong;
     }
 }

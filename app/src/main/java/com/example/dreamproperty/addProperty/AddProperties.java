@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.dreamproperty.R;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.net.FetchPlaceRequest;
@@ -29,6 +30,8 @@ public class AddProperties extends AppCompatActivity {
     ImageView nextpropertyPage;
     String propertyType="";
     String propertysubtype= "";
+    LatLng PropertyLatLong;
+    String getPropertyLatLong;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,7 +113,8 @@ public class AddProperties extends AppCompatActivity {
         searchpropertyloc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<Place.Field> fields = Arrays.asList(Place.Field.ADDRESS);
+                List<Place.Field> fields = Arrays.asList(Place.Field.ADDRESS, Place.Field.LAT_LNG);
+
                 Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fields).build(
                         AddProperties.this);
                 startActivityForResult(intent, 100);
@@ -125,6 +129,7 @@ public class AddProperties extends AppCompatActivity {
                 intent.putExtra("Property Type",propertyType);
                 intent.putExtra("Property Subtype", propertysubtype);
                 intent.putExtra("Property Location", getSearchedLocation);
+                intent.putExtra("Property LatLong", getPropertyLatLong);
                 startActivity(intent);
             }
         });
@@ -140,6 +145,16 @@ public class AddProperties extends AppCompatActivity {
         if (requestCode == 100 && resultCode == RESULT_OK) {
             Place place = Autocomplete.getPlaceFromIntent(data);
             searchpropertyloc.setText(place.getAddress());
+            PropertyLatLong = place.getLatLng();
+            String  getlatlong = PropertyLatLong.toString();
+            getlatlong = getlatlong.replace("lat/lng:", "");
+            getlatlong = getlatlong.replace("(","");
+            getlatlong = getlatlong.replace(")","");
+            getlatlong = getlatlong.replaceAll("\\s", "");
+            System.out.println(getlatlong);
+            getPropertyLatLong = getlatlong;
+
+
         }
 
     }

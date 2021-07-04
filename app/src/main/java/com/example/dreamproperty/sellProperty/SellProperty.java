@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.dreamproperty.Dashboard;
 import com.example.dreamproperty.R;
+import com.example.dreamproperty.ViewFavouritesProperties;
 import com.example.dreamproperty.addProperty.AddFarmProperties;
 import com.example.dreamproperty.addProperty.AddProperties;
 import com.example.dreamproperty.addProperty.AddofficeProperties;
@@ -47,5 +49,12 @@ public class SellProperty extends AppCompatActivity implements View.OnClickListe
                     startActivity(new Intent(SellProperty.this , AddFarmProperties.class));
                     break;
             }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        startActivity(new Intent(SellProperty.this , Dashboard.class));
+        super.onBackPressed();
     }
 }

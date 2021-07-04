@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.dreamproperty.registerNewUser.registerNewUser;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -33,7 +35,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
-
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class EditUserProfile extends AppCompatActivity {
 
     EditText editFullName, editMobilNumber, editEmailaddress;
@@ -61,7 +63,26 @@ public class EditUserProfile extends AppCompatActivity {
         mstore = FirebaseFirestore.getInstance();
         mUser = mAuth.getCurrentUser();
         storageReference = FirebaseStorage.getInstance().getReference();
+        BottomNavigationView navView = findViewById(R.id.bottomNav_view);
+        navView.getMenu().findItem(R.id.navigation_profile).setChecked(true);
+        navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.navigation_home:
+                        Intent intent1 = new Intent(getApplicationContext(), Dashboard.class);
+                        startActivity(intent1);
+                        finish();
+                        break;
+                    case R.id.navigation_profile:
+                        Intent intent2 = new Intent(getApplicationContext(), EditUserProfile.class);
+                        startActivity(intent2);
+                        finish();
 
+                }
+                return false;
+            }
+        });
         StorageReference profileRef = storageReference.child("users/"+mAuth.getCurrentUser().getUid()+"/profile.jpg");
         profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override

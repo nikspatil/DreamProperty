@@ -43,7 +43,7 @@ public class Buyproperties extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buyproperties);
         ButterKnife.bind(this);
-        propertyList = (RecyclerView)findViewById(R.id.friend_list);
+        propertyList = (RecyclerView)findViewById(R.id.property_list);
         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         propertyList.setLayoutManager(linearLayoutManager);
         db = FirebaseFirestore.getInstance();
@@ -68,6 +68,7 @@ public class Buyproperties extends AppCompatActivity {
                 holder.propertyName.setText(model.getPropertyType());
                 holder.propertySubtype.setText(model.getPropertySubType());
                 holder.propertyID.setText(model.getDocumentId());
+
                 String firstpropertyimage = "";
                 for (String propertyimages : model.getImages()){
                     firstpropertyimage = propertyimages;
@@ -78,16 +79,18 @@ public class Buyproperties extends AppCompatActivity {
                         .into(holder.imageView);
 
                 holder.itemView.setOnClickListener(v -> {
-                    Snackbar.make(propertyList, model.getPropertyType()+",  at "+model.getPropertySubType(), Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
                     propertyImageList.clear();
                     for (String propertyimages : model.getImages()){
                         propertyImageList.add(propertyimages);
                     }
                     String checkPropertyType = String.valueOf(model.getPropertyType());
+                    String getpropertyID = getSnapshots().getSnapshot(position).getId();
+                    System.out.println("Property ID : "+getpropertyID);
                     if(checkPropertyType.equals("Home")) {
                         Intent intent = new Intent(getApplicationContext(), ShowDetailsOfHouseproperty.class);
+                        intent.putExtra("propertyID", getpropertyID);
                         intent.putExtra("Property Location", model.getPropertyLocation());
+                        intent.putExtra("Property LatLong", model.getPropertyLatLong());
                         intent.putExtra("House Property Bedrooms", model.getHousepropertybedrooms());
                         intent.putExtra("House Property Bathrooms", model.getHousepropertybathrooms());
                         intent.putExtra("House Property Price", model.getPropertyexpectedprice());
@@ -98,14 +101,19 @@ public class Buyproperties extends AppCompatActivity {
                     }else if(checkPropertyType.equals("Office")){
                         Intent intent = new Intent(getApplicationContext(), ShowDetailsOfOfficeProperty.class);
                         intent.putExtra("Property Location", model.getPropertyLocation());
+                        intent.putExtra("Property LatLong", model.getPropertyLatLong());
+                        intent.putExtra("propertyID", getpropertyID);
+                        intent.putExtra("propertyType", getPropertytype);
                         intent.putExtra("Office Property Price", model.getPropertyexpectedprice());
-//                        intent.putExtra("Office Property Area", model.getPropertyarea());
                         intent.putExtra("ownermobilnumer", model.getOwnermobilnumer());
                         intent.putExtra("PropertyImages", propertyImageList);
                         startActivity(intent);
                     }else if(checkPropertyType.equals("Farm")){
                         Intent intent = new Intent(getApplicationContext(), ShowDetailsOfFarmProperty.class);
+                        intent.putExtra("propertyID", getpropertyID);
                         intent.putExtra("Property Location", model.getPropertyLocation());
+                        intent.putExtra("Property LatLong", model.getPropertyLatLong());
+                        intent.putExtra("Property Type", checkPropertyType);
                         intent.putExtra("Farm Property Price", model.getPropertyexpectedprice());
                         intent.putExtra("Farm Property Area", model.getPropertyarea());
                         intent.putExtra("ownermobilnumer", model.getOwnermobilnumer());
@@ -113,7 +121,10 @@ public class Buyproperties extends AppCompatActivity {
                         startActivity(intent);
                     }else if(checkPropertyType.equals("Plot")){
                         Intent intent = new Intent(getApplicationContext(), ShowDetailsOfFarmProperty.class);
+                        intent.putExtra("propertyID", getpropertyID);
+                        intent.putExtra("Property Type", checkPropertyType);
                         intent.putExtra("Property Location", model.getPropertyLocation());
+                        intent.putExtra("Property LatLong", model.getPropertyLatLong());
                         intent.putExtra("Farm Property Price", model.getPropertyexpectedprice());
                         intent.putExtra("Farm Property Area", model.getPropertyarea());
                         intent.putExtra("ownermobilnumer", model.getOwnermobilnumer());

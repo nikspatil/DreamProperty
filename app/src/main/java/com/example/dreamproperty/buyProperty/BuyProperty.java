@@ -18,7 +18,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dreamproperty.Dashboard;
 import com.example.dreamproperty.R;
+import com.example.dreamproperty.ViewFavouritesProperties;
 import com.example.dreamproperty.addProperty.AddProperties;
 import com.example.dreamproperty.addProperty.AddPropertiesNext;
 import com.example.dreamproperty.addProperty.AddofficeProperties;
@@ -147,7 +149,6 @@ public class BuyProperty extends FragmentActivity implements OnMapReadyCallback,
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.homepropcard:
-                //startActivity(new Intent(BuyProperty.this , Buyproperties.class));
                 propertypecard="Home";
                 Intent intent = new Intent(getApplicationContext(), Buyproperties.class);
                 intent.putExtra("Property Type",propertypecard);
@@ -171,8 +172,13 @@ public class BuyProperty extends FragmentActivity implements OnMapReadyCallback,
                 intent3.putExtra("Property Type",propertypecard);
                 startActivity(intent3);
                 break;
-
-
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        startActivity(new Intent(BuyProperty.this , Dashboard.class));
+        super.onBackPressed();
     }
 }

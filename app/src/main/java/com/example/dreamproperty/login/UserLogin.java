@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.dreamproperty.Dashboard;
 import com.example.dreamproperty.R;
+import com.example.dreamproperty.ViewFavouritesProperties;
 import com.example.dreamproperty.addProperty.AddProperties;
 import com.example.dreamproperty.addProperty.AddPropertiesNext;
 import com.example.dreamproperty.addProperty.AddpropertiesLastPage;
@@ -60,7 +61,8 @@ public class UserLogin extends AppCompatActivity {
         signuphinttv = findViewById(R.id.signuphint);
         googleSignIn = (ImageView)findViewById(R.id.googlesignbtn);
         facebookSignIn = (ImageView) findViewById(R.id.facebooksigninbtn);
-
+        loginEmail.setText("test@gmail.com");
+        loginPassword.setText("test123");
         pd = new ProgressDialog(this);
         pd1 = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
@@ -144,7 +146,7 @@ public class UserLogin extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser user) {
-        Intent i = new Intent(UserLogin.this, Dashboard.class);
+        Intent i = new Intent(UserLogin.this, ViewFavouritesProperties.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
     }
@@ -173,7 +175,6 @@ public class UserLogin extends AppCompatActivity {
                     }else{
                         pd.dismiss();
                         Toast.makeText(UserLogin.this, ""+task.getException(),Toast.LENGTH_LONG).show();
-
                     }
 
                 }

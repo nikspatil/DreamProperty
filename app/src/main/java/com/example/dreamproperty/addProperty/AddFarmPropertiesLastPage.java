@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.dreamproperty.Dashboard;
 import com.example.dreamproperty.R;
 import com.example.dreamproperty.buyProperty.BuyProperty;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -56,7 +57,7 @@ public class AddFarmPropertiesLastPage extends AppCompatActivity {
     FirebaseFirestore mstore;
     EditText expectedprice, farmarea, ownermobinum;
     String userId;
-    String getPropertytype, getpropertysubtype, getpropertylocation;
+    String getPropertytype, getpropertysubtype, getpropertylocation, getpropertyLatlong;
     String getpropertyexpectedprice, getownermobinumber, getfarmarea;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,7 @@ public class AddFarmPropertiesLastPage extends AppCompatActivity {
         getPropertytype = intent.getStringExtra("Property Type");
         getpropertysubtype = intent.getStringExtra("Property Subtype");
         getpropertylocation = intent.getStringExtra("Property Location");
+        getpropertyLatlong = intent.getStringExtra("Property LatLong");
 
         propertyuploadphoto = findViewById(R.id.uploadpropertyphotobtn);
         displayselectedphotoRV = findViewById(R.id.uploadphotorv);
@@ -168,6 +170,7 @@ public class AddFarmPropertiesLastPage extends AppCompatActivity {
             dataMap.put("propertyType", getPropertytype);
             dataMap.put("propertySubType", getpropertysubtype);
             dataMap.put("propertyLocation", getpropertylocation);
+            dataMap.put("propertyLatLong", getpropertyLatlong);
             dataMap.put("propertyexpectedprice", getpropertyexpectedprice);
             dataMap.put("propertyarea",getfarmarea);
             dataMap.put("ownermobilnumer", getownermobinumber);
@@ -176,6 +179,7 @@ public class AddFarmPropertiesLastPage extends AppCompatActivity {
             dataMap.put("propertyType", getPropertytype);
             dataMap.put("propertySubType", getpropertysubtype);
             dataMap.put("propertyLocation", getpropertylocation);
+            dataMap.put("propertyLatLong", getpropertyLatlong);
             dataMap.put("propertyexpectedprice", getpropertyexpectedprice);
             dataMap.put("propertyarea",getfarmarea);
             dataMap.put("ownermobilnumer", getownermobinumber);
@@ -186,8 +190,7 @@ public class AddFarmPropertiesLastPage extends AppCompatActivity {
             public void onSuccess(DocumentReference documentReference) {
                 progressDialog.dismiss();
                 Toast.makeText(AddFarmPropertiesLastPage.this, "Your property added successfully!!", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(AddFarmPropertiesLastPage.this , BuyProperty.class);
-//                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                Intent i = new Intent(AddFarmPropertiesLastPage.this , Dashboard.class);
                 startActivity(i);
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -222,7 +225,7 @@ public class AddFarmPropertiesLastPage extends AppCompatActivity {
 
             } else if (data.getData() != null) {
 
-                Toast.makeText(AddFarmPropertiesLastPage.this, "Selected Single File", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddFarmPropertiesLastPage.this, "Please select multiple photos", Toast.LENGTH_SHORT).show();
 
             }
 
