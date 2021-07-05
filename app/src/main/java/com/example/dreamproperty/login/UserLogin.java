@@ -145,7 +145,7 @@ public class UserLogin extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser user) {
-        Intent i = new Intent(UserLogin.this, ViewFavouritesProperties.class);
+        Intent i = new Intent(UserLogin.this, Dashboard.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
     }

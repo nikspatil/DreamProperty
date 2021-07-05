@@ -68,7 +68,7 @@ public class ShowDetailsOfOfficeProperty extends AppCompatActivity {
         proptylocation = (TextView)findViewById(R.id.proplocationtv);
         propertyprice = (TextView)findViewById(R.id.proppricetv);
         propertyarea = (TextView)findViewById(R.id.houseproparea);
-        callowner = findViewById(R.id.callofficeowner);
+        callowner = findViewById(R.id.callowner);
         msgowner = findViewById(R.id.msgtoowner);
 
         ArrayList<String> propetyImageList = (ArrayList<String>) getIntent().getSerializableExtra("PropertyImages");
