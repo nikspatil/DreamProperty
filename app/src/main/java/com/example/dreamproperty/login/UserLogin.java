@@ -61,8 +61,7 @@ public class UserLogin extends AppCompatActivity {
         signuphinttv = findViewById(R.id.signuphint);
         googleSignIn = (ImageView)findViewById(R.id.googlesignbtn);
         facebookSignIn = (ImageView) findViewById(R.id.facebooksigninbtn);
-        loginEmail.setText("test@gmail.com");
-        loginPassword.setText("test123");
+
         pd = new ProgressDialog(this);
         pd1 = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();

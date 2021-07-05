@@ -1,5 +1,6 @@
 package com.example.dreamproperty;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,8 +13,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -24,8 +27,12 @@ import com.example.dreamproperty.buyProperty.ShowDetailsOfHouseproperty;
 import com.example.dreamproperty.buyProperty.ShowDetailsOfOfficeProperty;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.firebase.ui.firestore.SnapshotParser;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
@@ -48,6 +55,8 @@ public class ViewFavouritesProperties extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirestoreRecyclerAdapter adapter;
     LinearLayoutManager linearLayoutManager;
+
+    CollectionReference reference;
     FirebaseAuth mAuth;
     FirebaseUser mUser;
     FirebaseFirestore mstore;
@@ -66,7 +75,7 @@ public class ViewFavouritesProperties extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
         userID = mUser.getUid();
-
+        reference = mstore.collection("users");
         propertyImageList = new ArrayList<String>();
 
         Intent intent = getIntent();
@@ -78,11 +87,24 @@ public class ViewFavouritesProperties extends AppCompatActivity {
     private void getPropertyList(){
         Query query = db.collection("users").document(userID).collection("FavouritesList");
         FirestoreRecyclerOptions<Note> response = new FirestoreRecyclerOptions.Builder<Note>()
-                .setQuery(query, Note.class)
-                .build();
+                  .setQuery(query, new SnapshotParser<Note>() {
+                      @NonNull
+                      @Override
+                      public Note parseSnapshot(@NonNull DocumentSnapshot snapshot) {
+                          Note note = snapshot.toObject(Note.class);
+                          note.setDocumentId(snapshot.getId());
+                          return note;
+                      }
+                  })
+                  .setLifecycleOwner(this)
+                  .build();
+//                .setQuery(query, Note.class)
+//                .build();
+
         adapter = new FirestoreRecyclerAdapter<Note, ViewFavouritesProperties.PropertyHolder>(response) {
             @Override
             public void onBindViewHolder(ViewFavouritesProperties.PropertyHolder holder, int position, Note model) {
+
                 List<String> images = new ArrayList<>();
                 for (String propertyimages : model.getImages()){
                     images.add(propertyimages);
@@ -91,7 +113,7 @@ public class ViewFavouritesProperties extends AppCompatActivity {
                 holder.propertyType.setText(model.getPropertyType());
                 holder.propertyLocation.setText(model.getPropertyLocation());
                 holder.propertyprice.setText(model.getPropertyexpectedprice());
-                System.out.println("Area"+ model.getPropertyarea());
+                System.out.println(model.getDocumentId());
                 String pArea = model.getPropertyarea();
                 if(pArea == null) {
                     holder.propertyarea.setVisibility(View.INVISIBLE);
@@ -123,13 +145,35 @@ public class ViewFavouritesProperties extends AppCompatActivity {
                 });
                 PropertyDetailsAdapter propertyDetailsAdapter = new PropertyDetailsAdapter(images);
                 holder.fvpropertyimgslider.setSliderAdapter(propertyDetailsAdapter);
+
+
+                holder.delfvItem.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        DocumentSnapshot snapshot = (DocumentSnapshot) adapter.getSnapshots().getSnapshot(position);
+                        System.out.println(snapshot.getId());
+                        String getfvitemId = (String) snapshot.get("propertyId");
+                        reference.document(userID).collection("FavouritesList").document(snapshot.getId()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(getApplicationContext(), "Property deleted from your favourite list!!!",Toast.LENGTH_LONG).show();
+                            }
+                        });
+                        reference.document(userID).collection("Favourites").document(getfvitemId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+
+                            }
+                        });
+                        adapter.notifyDataSetChanged();
+                    }
+                });
             }
 
             @Override
             public ViewFavouritesProperties.PropertyHolder onCreateViewHolder(ViewGroup group, int i) {
                 View view = LayoutInflater.from(group.getContext())
                         .inflate(R.layout.getfavouritesproperties, group, false);
-
                 return new PropertyHolder(view);
             }
 
@@ -162,6 +206,8 @@ public class ViewFavouritesProperties extends AppCompatActivity {
         CardView getpropertyDirection;
         @BindView(R.id.callpropertyownercardview)
         CardView calltoOwner;
+        @BindView(R.id.deletefvitem)
+        ImageButton delfvItem;
         public PropertyHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

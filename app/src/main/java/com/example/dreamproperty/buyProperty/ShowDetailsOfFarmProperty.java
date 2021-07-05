@@ -100,6 +100,8 @@ public class ShowDetailsOfFarmProperty extends AppCompatActivity {
         PropertyDetailsAdapter propertyDetailsAdapter = new PropertyDetailsAdapter(images);
         propertyimgslider.setSliderAdapter(propertyDetailsAdapter);
 
+        System.out.println("Inside show details farm property");
+        System.out.println(getpropertyID);
 
         callowner.setOnClickListener(new View.OnClickListener() {
             @Override
