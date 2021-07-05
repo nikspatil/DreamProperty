@@ -40,7 +40,7 @@ public class ShowDetailsOfOfficeProperty extends AppCompatActivity {
     List<String> images;
     TextView proptylocation, propertyprice, propertyarea;
     SliderView propertyimgslider;
-    ImageButton callowner;
+    ImageButton callowner, msgowner;
     String getPropertytype, getpropertysubtype, getpropertylocation;
     String gethousepropertyarea, getpropertyexpectedprice, getownermobinumber;
     String getpropertyID;
@@ -69,6 +69,7 @@ public class ShowDetailsOfOfficeProperty extends AppCompatActivity {
         propertyprice = (TextView)findViewById(R.id.proppricetv);
         propertyarea = (TextView)findViewById(R.id.houseproparea);
         callowner = findViewById(R.id.callofficeowner);
+        msgowner = findViewById(R.id.msgtoowner);
 
         ArrayList<String> propetyImageList = (ArrayList<String>) getIntent().getSerializableExtra("PropertyImages");
         Intent intent = getIntent();
@@ -99,6 +100,26 @@ public class ShowDetailsOfOfficeProperty extends AppCompatActivity {
                 String getnumber ="tel:" +getownermobinumber;
                 i.setData(Uri.parse(getnumber));
                 startActivity(i);
+            }
+        });
+
+        msgowner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String messageToSend = "Hi, I am interested in your posted property. Is this property avaialble for sale? can i come to visit?";
+                String number = getownermobinumber;
+                Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+                smsIntent.setData(Uri.parse("smsto:"));
+                smsIntent.setType("vnd.android-dir/mms-sms");
+                smsIntent.putExtra("address"  , new String (number));
+                smsIntent.putExtra("sms_body"  , messageToSend);
+                try {
+                    startActivity(smsIntent);
+                    finish();
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(ShowDetailsOfOfficeProperty.this,
+                            "SMS faild, please try again later.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

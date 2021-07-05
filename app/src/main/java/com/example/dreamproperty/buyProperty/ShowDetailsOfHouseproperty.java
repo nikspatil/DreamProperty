@@ -45,7 +45,7 @@ public class ShowDetailsOfHouseproperty extends AppCompatActivity {
     String getbedroomtype;
     String getbathrromtype;
     String getpropertyID, gethousepropertyarea, getpropertyexpectedprice, getownermobinumber;
-    ImageView calltoOwner;
+    ImageView calltoOwner, msgowner;
 
     MenuItem favitem;
     boolean isFavorite = false;
@@ -67,6 +67,7 @@ public class ShowDetailsOfHouseproperty extends AppCompatActivity {
         noOfBaths = (TextView)findViewById(R.id.NoofBathrooms);
         propertyarea = (TextView)findViewById(R.id.houseproparea);
         calltoOwner = findViewById(R.id.callowner);
+        msgowner = findViewById(R.id.msgtoowner);
 
         mstore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -116,7 +117,25 @@ public class ShowDetailsOfHouseproperty extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
+        msgowner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String messageToSend = "Hi, I am interested in your posted property. Is this property avaialble for sale? can i come to visit?";
+                String number = getownermobinumber;
+                Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+                smsIntent.setData(Uri.parse("smsto:"));
+                smsIntent.setType("vnd.android-dir/mms-sms");
+                smsIntent.putExtra("address"  , new String (number));
+                smsIntent.putExtra("sms_body"  , messageToSend);
+                try {
+                    startActivity(smsIntent);
+                    finish();
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(ShowDetailsOfHouseproperty.this,
+                            "SMS faild, please try again later.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
