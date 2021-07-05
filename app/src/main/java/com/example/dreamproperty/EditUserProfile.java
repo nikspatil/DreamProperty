@@ -205,4 +205,9 @@ public class EditUserProfile extends AppCompatActivity {
             }
         });
     }
+
+    public void userlogout(View view) {
+        mAuth.signOut();
+        Toast.makeText(getApplicationContext(), "Logout Successfully!!", Toast.LENGTH_LONG).show();
+    }
 }
