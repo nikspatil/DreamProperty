@@ -41,7 +41,7 @@ public class UserLogin extends AppCompatActivity {
     private static final int RC_SIGN_IN = 101 ;
     EditText loginEmail, loginPassword;
     Button loginButton;
-    ImageView googleSignIn, facebookSignIn;
+    ImageView googleSignIn;
     TextView signuphinttv;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     ProgressDialog pd, pd1;
@@ -60,7 +60,6 @@ public class UserLogin extends AppCompatActivity {
         loginButton = findViewById(R.id.loginbutton);
         signuphinttv = findViewById(R.id.signuphint);
         googleSignIn = (ImageView)findViewById(R.id.googlesignbtn);
-        facebookSignIn = (ImageView) findViewById(R.id.facebooksigninbtn);
 
         pd = new ProgressDialog(this);
         pd1 = new ProgressDialog(this);

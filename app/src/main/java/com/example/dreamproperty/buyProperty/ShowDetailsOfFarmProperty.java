@@ -81,6 +81,7 @@ public class ShowDetailsOfFarmProperty extends AppCompatActivity {
         Intent intent = getIntent();
 
         getpropertyID = intent.getStringExtra("propertyID");
+        favpropertychecker();
         getPropertytype = intent.getStringExtra("Property Type");
         getpropertylocation = intent.getStringExtra("Property Location");
         getpropertyLatLong = intent.getStringExtra("Property LatLong");
@@ -129,6 +130,24 @@ public class ShowDetailsOfFarmProperty extends AppCompatActivity {
                 } catch (android.content.ActivityNotFoundException ex) {
                     Toast.makeText(ShowDetailsOfFarmProperty.this,
                             "SMS faild, please try again later.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void favpropertychecker() {
+        reference.document(userID).collection("Favourites").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(DocumentSnapshot documentSnapshot : task.getResult()){
+                        if(getpropertyID.equals(documentSnapshot.getId())){
+                            isFavorite = true;
+                            favitem.setIcon(R.drawable.ic_baseline_favorite_24);
+                        }else{
+                            System.out.println("Not matched");
+                        }
+                    }
                 }
             }
         });

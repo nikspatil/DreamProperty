@@ -1,6 +1,7 @@
 package com.example.dreamproperty.buyProperty;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -24,7 +25,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -46,13 +50,14 @@ public class ShowDetailsOfOfficeProperty extends AppCompatActivity {
     String getpropertyID;
 
     MenuItem favitem;
-    boolean isFavorite = false;
+    boolean isFavorite;
     Menu menu;
     CollectionReference reference;
     FirebaseAuth mAuth;
     FirebaseUser mUser;
     FirebaseFirestore mstore;
     String userID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,17 +79,15 @@ public class ShowDetailsOfOfficeProperty extends AppCompatActivity {
         ArrayList<String> propetyImageList = (ArrayList<String>) getIntent().getSerializableExtra("PropertyImages");
         Intent intent = getIntent();
         getpropertyID = intent.getStringExtra("propertyID");
-        System.out.println("Inside shoe details office"+getpropertyID);
+        favpropertychecker();
         getPropertytype = intent.getStringExtra("Property Type");
         getpropertylocation = intent.getStringExtra("Property Location");
         getpropertyexpectedprice = intent.getStringExtra("Office Property Price");
-//        gethousepropertyarea = intent.getStringExtra("Office Property Area");
         getownermobinumber = intent.getStringExtra("ownermobilnumer");
         getpropertyexpectedprice += " Price (INR)";
 
         proptylocation.setText(getpropertylocation);
         propertyprice.setText(getpropertyexpectedprice);
-//        propertyarea.setText(gethousepropertyarea);
         images = new ArrayList<>();
         for (int i = 0; i < propetyImageList.size(); i++) {
             System.out.println(propetyImageList.get(i));
@@ -124,6 +127,23 @@ public class ShowDetailsOfOfficeProperty extends AppCompatActivity {
         });
     }
 
+    private void favpropertychecker() {
+        reference.document(userID).collection("Favourites").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(DocumentSnapshot documentSnapshot : task.getResult()){
+                        if(getpropertyID.equals(documentSnapshot.getId())){
+                            isFavorite = true;
+                            favitem.setIcon(R.drawable.ic_baseline_favorite_24);
+                        }else{
+                            System.out.println("Not matched");
+                        }
+                    }
+                }
+            }
+        });
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -9,7 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.example.dreamproperty.Dashboard;
 import com.example.dreamproperty.R;
+import com.example.dreamproperty.ViewFavouritesProperties;
 
 public class AddPropertiesNext extends AppCompatActivity implements View.OnClickListener {
     ImageView lastpropertyPage;
@@ -72,6 +74,7 @@ public class AddPropertiesNext extends AppCompatActivity implements View.OnClick
                 intent.putExtra("House Property Bathrooms", getbathrromtype);
                 intent.putExtra("House Property Area", gethousepropertyarea);
                 startActivity(intent);
+                finish();
 
             }
         });
@@ -114,5 +117,11 @@ public class AddPropertiesNext extends AppCompatActivity implements View.OnClick
                 getbathrromtype = "5";
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(AddPropertiesNext.this , AddProperties.class));
+        super.onBackPressed();
     }
 }

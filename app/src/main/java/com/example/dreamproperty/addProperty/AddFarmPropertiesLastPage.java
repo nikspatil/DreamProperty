@@ -189,6 +189,7 @@ public class AddFarmPropertiesLastPage extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 progressDialog.dismiss();
+                finish();
                 Toast.makeText(AddFarmPropertiesLastPage.this, "Your property added successfully!!", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(AddFarmPropertiesLastPage.this , Dashboard.class);
                 startActivity(i);

@@ -108,6 +108,15 @@ public class AddProperties extends AppCompatActivity {
             }
         });
 
+        commercialsubtype.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                propertysubtype = "Commercial";
+                residentialsubtype.setVisibility(View.INVISIBLE);
+                callSearchproprtylocation();
+            }
+        });
+
         // get property location
         searchpropertyloc.setFocusable(false);
         searchpropertyloc.setOnClickListener(new View.OnClickListener() {
@@ -131,6 +140,7 @@ public class AddProperties extends AppCompatActivity {
                 intent.putExtra("Property Location", getSearchedLocation);
                 intent.putExtra("Property LatLong", getPropertyLatLong);
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -154,8 +164,6 @@ public class AddProperties extends AppCompatActivity {
             System.out.println(getlatlong);
             getPropertyLatLong = getlatlong;
 
-
         }
-
     }
 }

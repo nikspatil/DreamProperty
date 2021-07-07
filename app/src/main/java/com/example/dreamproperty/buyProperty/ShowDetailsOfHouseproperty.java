@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -79,6 +80,7 @@ public class ShowDetailsOfHouseproperty extends AppCompatActivity {
         ArrayList<String> propetyImageList = (ArrayList<String>) getIntent().getSerializableExtra("PropertyImages");
         Intent intent = getIntent();
         getpropertyID = intent.getStringExtra("propertyID");
+        favpropertychecker();
         getpropertylocation = intent.getStringExtra("Property Location");
         getpropertyLatLong = intent.getStringExtra("Property LatLong");
         getbedroomtype = intent.getStringExtra("House Property Bedrooms");
@@ -133,6 +135,24 @@ public class ShowDetailsOfHouseproperty extends AppCompatActivity {
                 } catch (android.content.ActivityNotFoundException ex) {
                     Toast.makeText(ShowDetailsOfHouseproperty.this,
                             "SMS faild, please try again later.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void favpropertychecker() {
+        reference.document(userID).collection("Favourites").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(DocumentSnapshot documentSnapshot : task.getResult()){
+                        if(getpropertyID.equals(documentSnapshot.getId())){
+                            isFavorite = true;
+                            favitem.setIcon(R.drawable.ic_baseline_favorite_24);
+                        }else{
+                            System.out.println("Not matched");
+                        }
+                    }
                 }
             }
         });

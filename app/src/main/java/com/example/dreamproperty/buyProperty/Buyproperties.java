@@ -38,6 +38,7 @@ public class Buyproperties extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirestoreRecyclerAdapter adapter;
     LinearLayoutManager linearLayoutManager;
+    String getpropertyID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,8 +56,11 @@ public class Buyproperties extends AppCompatActivity {
     }
 
     private void getPropertyList(){
+//        Query query = db.collection("usersProperty")
+//                .whereEqualTo("propertyType", getPropertytype)
+//                .whereGreaterThanOrEqualTo("propertyLocation", "Beng")
+//                .whereLessThanOrEqualTo("propertyLocation", "Beng\uF7FF");
         Query query = db.collection("usersProperty").whereEqualTo("propertyType", getPropertytype);
-
         FirestoreRecyclerOptions<Note> response = new FirestoreRecyclerOptions.Builder<Note>()
                 .setQuery(query, Note.class)
                 .build();
@@ -84,11 +88,12 @@ public class Buyproperties extends AppCompatActivity {
                         propertyImageList.add(propertyimages);
                     }
                     String checkPropertyType = String.valueOf(model.getPropertyType());
-                    String getpropertyID = getSnapshots().getSnapshot(position).getId();
-                    System.out.println("Property ID : "+getpropertyID);
+                    getpropertyID = getSnapshots().getSnapshot(position).getId();
+
                     if(checkPropertyType.equals("Home")) {
                         Intent intent = new Intent(getApplicationContext(), ShowDetailsOfHouseproperty.class);
                         intent.putExtra("propertyID", getpropertyID);
+                        System.out.println("Property ID : "+getpropertyID);
                         intent.putExtra("Property Location", model.getPropertyLocation());
                         intent.putExtra("Property LatLong", model.getPropertyLatLong());
                         intent.putExtra("House Property Bedrooms", model.getHousepropertybedrooms());
@@ -103,6 +108,7 @@ public class Buyproperties extends AppCompatActivity {
                         intent.putExtra("Property Location", model.getPropertyLocation());
                         intent.putExtra("Property LatLong", model.getPropertyLatLong());
                         intent.putExtra("propertyID", getpropertyID);
+                        System.out.println("Property ID : "+getpropertyID);
                         intent.putExtra("propertyType", getPropertytype);
                         intent.putExtra("Office Property Price", model.getPropertyexpectedprice());
                         intent.putExtra("ownermobilnumer", model.getOwnermobilnumer());

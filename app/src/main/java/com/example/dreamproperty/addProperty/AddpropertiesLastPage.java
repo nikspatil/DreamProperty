@@ -197,6 +197,7 @@ public class AddpropertiesLastPage extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 progressDialog.dismiss();
+                finish();
                 Toast.makeText(AddpropertiesLastPage.this, "Your property added successfully!!", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(AddpropertiesLastPage.this , Dashboard.class);
                 startActivity(i);
