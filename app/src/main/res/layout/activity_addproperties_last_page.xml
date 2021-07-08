@@ -115,8 +115,8 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textSize="15dp"
-                android:text="9999999999"
-                android:inputType="number"/>
+                android:inputType="number"
+                android:hint="@string/fui_invalid_phone_number" />
         </LinearLayout>
 
         <LinearLayout

@@ -15,11 +15,12 @@
     <color name="profilePrimaryDark">#FF3B30</color>
     <color name="profileAccentColor">#F7F7F7</color>
     <color name="deeppurple">#7c4dff</color>
-    <color name="green">#00bfa5</color>
+    <color name="green">#208178</color>
     <color name="yello">#FFEBBC</color>
     <color name="lightgray">#ededed</color>
     <color name="solidCircle">#AAFFFFFF</color>
     <color name="circleBorder">#50FFFFFF</color>
     <color name="gradEnd">#67EFC8</color>
     <color name="gradStart">#63C9FF</color>
+    <color name="check">#2F7A73</color>
 </resources>

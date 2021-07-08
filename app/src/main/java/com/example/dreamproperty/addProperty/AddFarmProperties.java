@@ -119,7 +119,14 @@ public class AddFarmProperties extends AppCompatActivity {
                 callSearchproprtylocation();
             }
         });
-
+        commercialsubtype.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                propertysubtype = "Commercial";
+                residentialsubtype.setVisibility(View.INVISIBLE);
+                callSearchproprtylocation();
+            }
+        });
         // get property location
         searchpropertyloc.setFocusable(false);
         searchpropertyloc.setOnClickListener(new View.OnClickListener() {

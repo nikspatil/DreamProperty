@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class AddpropertiesLastPage extends AppCompatActivity {
 
@@ -117,14 +118,43 @@ public class AddpropertiesLastPage extends AppCompatActivity {
         finishpropertybtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 getpropertyexpectedprice = expectedprice.getText().toString();
                 getownermobinumber = ownermobinum.getText().toString();
-                addpropertuinfo(view);
+
+                boolean check = isValidMobile(getownermobinumber);
+                if(check) {
+                    addpropertuinfo(view);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Please add correct number", Toast.LENGTH_LONG).show();
+                }
                 //startActivityForResult(Intent.createChooser(i, "Select House Photos"), RESULT_LOAD_IMAGE);
             }
         });
     }
 
+    private boolean isValidMobile(String phone) {
+        System.out.println(getownermobinumber);
+        boolean check=false;
+        if(!Pattern.matches("[a-zA-Z]+", phone))
+        {
+            if(phone.length() < 6 || phone.length() > 13)
+            {
+                check = false;
+
+            }
+            else
+            {
+                check = true;
+
+            }
+        }
+        else
+        {
+            check=false;
+        }
+        return check;
+    }
     private void addpropertuinfo(View view) {
         if (AllImageUri.size() != 0) {
             final ProgressDialog progressDialog = new ProgressDialog(this);

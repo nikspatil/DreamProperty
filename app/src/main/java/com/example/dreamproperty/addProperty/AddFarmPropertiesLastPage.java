@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class AddFarmPropertiesLastPage extends AppCompatActivity {
     private static final int RESULT_LOAD_IMAGE = 1 ;
@@ -111,12 +112,37 @@ public class AddFarmPropertiesLastPage extends AppCompatActivity {
                 getpropertyexpectedprice = expectedprice.getText().toString();
                 getownermobinumber = ownermobinum.getText().toString();
                 getfarmarea = farmarea.getText().toString();
-                addpropertuinfo(view);
+                boolean checkinputphone = isValidMobile(getownermobinumber);
+                if(checkinputphone) {
+                    addpropertuinfo(view);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Please add correct number", Toast.LENGTH_LONG).show();
+                }
                 //startActivityForResult(Intent.createChooser(i, "Select House Photos"), RESULT_LOAD_IMAGE);
             }
         });
     }
+    private boolean isValidMobile(String phone) {
+        boolean check=false;
+        if(!Pattern.matches("[a-zA-Z]+", phone))
+        {
+            if(phone.length() < 6 || phone.length() > 13)
+            {
+                check = false;
 
+            }
+            else
+            {
+                check = true;
+
+            }
+        }
+        else
+        {
+            check=false;
+        }
+        return check;
+    }
     private void addpropertuinfo(View view) {
         if (AllImageUri.size() != 0) {
             final ProgressDialog progressDialog = new ProgressDialog(this);
